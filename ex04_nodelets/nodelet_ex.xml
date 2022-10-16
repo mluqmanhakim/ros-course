@@ -1,0 +1,7 @@
+<library path="lib/libex04_nodelets">
+    <class name="nodelet_exercise/Hello" type="nodelet_exercise::Hello" base_class_type="nodelet::Nodelet">
+        <description>
+            A node to republish a message
+        </description>
+    </class>
+</library>
