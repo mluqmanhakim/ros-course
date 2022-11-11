@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+    <group>
+        <!-- Robot model -->
+        <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find ex06)/urdf/robot2_final.xacro'" />
+        <arg name="x" default="0"/>
+        <arg name="y" default="0"/>
+        <arg name="z" default="0.25"/>
+
+        <node name="gazebo" pkg="gazebo_ros" type="gazebo" args="$(find gazebo_ros)/launch/empty.world" respawn="false" output="screen"/>
+        <!-- Spawn -->
+        <node name="spawn_robot2" pkg="gazebo_ros" type="spawn_model" output="screen" args="-urdf -param robot_description -model robot2_final -x $(arg x) -y $(arg y) -z $(arg z)" />
+    </group>
+</launch>

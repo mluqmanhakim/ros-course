@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<robot>
+
+  <gazebo>
+    <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
+      <legacyMode>false</legacyMode>                         <!-- Ha true, felcseréli a jobb és bal kerekeket, defaults = true -->
+      <updateRate>10</updateRate>                            <!-- Plugin frissítési rátája Hz -ben -->
+      <leftJoint>left_wheel_joint</leftJoint>                <!-- Bal joint neve, defaults = `left_joint` -->
+      <rightJoint>right_wheel_joint</rightJoint>             <!-- Jobb joint neve, defaults = `right_joint` -->
+      <wheelSeparation>0.4</wheelSeparation>                 <!-- A két kerék centrumának távolsága [m], defaults = 0.34 m -->
+      <wheelDiameter>0.2</wheelDiameter>                     <!-- Kerekek átmérője [m], defaults = 0.15 m -->
+      <wheelTorque>10</wheelTorque>                          <!-- Maximális nyomaték, amit a kerék produkálhat [Nm], defaults = 5 Nm -->
+      <wheelAcceleration>1.0</wheelAcceleration>             <!-- Kerés gyorsulása [rad/s^2], defaults = 0.0 rad/s^2 -->
+      <commandTopic>cmd_vel</commandTopic>                   <!-- Topic a geometry_msgs/Twist message parancsok fogadására, defaults = `cmd_vel` -->
+      <odometryTopic>odom</odometryTopic>                    <!-- Topic a nav_msgs/Odometry messag -ek küldésére, defaults = `odom` -->
+      <odometryFrame>odom</odometryFrame>                    <!-- Odometria frame, defaults = `odom` -->
+      <robotBaseFrame>base_footprint</robotBaseFrame>        <!-- Robot frame, amiből az odometriát számolja, defaults = `base_footprint` -->
+      <odometrySource>world</odometrySource>                 <!-- Odometria forrás, 0 = ENCODER, 1 = WORLD, defaults = WORLD -->
+      <publishWheelTF>false</publishWheelTF>                 <!-- Ha true, akkor a kerekek számára küldi a transform -okat, defaults = false -->
+      <publishOdomTF>true</publishOdomTF>                    <!-- Ha true, akkor az odometriának küldi a transform -okat, defaults = true -->
+      <publishWheelJointState>false</publishWheelJointState> <!-- Ha true, akkor küldi a sensor_msgs/JointState a /joint_states -re a kerék jointok számáral, defaults = false -->
+      <publishTf>1</publishTf>                               <!-- Ha 1 (true), küldje a transzformokat a Gazebo -ból, defaults = 1 -->
+      <rosDebugLevel>na</rosDebugLevel>                      <!-- ROS Debug szint, defaults = na -->
+    </plugin>
+  </gazebo>
+
+</robot>

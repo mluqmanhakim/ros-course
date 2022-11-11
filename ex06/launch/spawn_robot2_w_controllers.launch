@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+
+  <!-- Robot model -->
+  <param name="robot_description" command="$(find xacro)/xacro '$(find ex06)/urdf/robot2_final.xacro'" />
+  <arg name="x" default="0"/>
+  <arg name="y" default="0"/>
+  <arg name="z" default="0.25"/>
+
+  <!-- Launch Gazebo World -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="use_sim_time" value="true"/>
+    <arg name="debug" value="false"/>
+    <arg name="gui" value="true" />
+  </include>
+
+  <!-- Spawn My Robot -->
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" 
+        args="-urdf -param robot_description -model robot2 
+              -x $(arg x) -y $(arg y) -z $(arg z)"/>
+
+
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find ex06)/rviz/config.rviz" />
+
+        
+  <!-- Joint state publisher is not needed, because joint states are published by Gazebo -->
+
+  <!-- Send robot states to tf -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
+    <remap from="joint_states" to="/robot2/joint_states" />
+  </node>
+
+  <rosparam file ="$(find ex06)/config/joints.yaml"/>
+  <node name= "controller_spawner" pkg= "controller_manager" type="controller_manager" ns="/robot2" output="screen" respawn="false" args="spawn joint0_position_controller joint1_position_controller joint2_position_controller joint3_position_controller joint4_position_controller"/>
+
+</launch>

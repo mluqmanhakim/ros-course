@@ -108,7 +108,7 @@
         length="0.8"
     />
 
-        <xacro:m_joint 
+    <xacro:m_joint 
         name="J_4" 
         type="revolute"
         axis_xyz="0 0 1"

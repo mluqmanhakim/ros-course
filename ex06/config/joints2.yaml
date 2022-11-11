@@ -1,0 +1,19 @@
+robot2:
+
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50
+
+  arm_controller:
+    type: "position_controllers/JointTrajectoryController"
+    joints:
+      - J_0
+      - J_1
+      - J_2
+      - J_3
+      - J_4
+
+    constraints:
+      goal_time: 0.6
+
+    state_publish_rate: 25

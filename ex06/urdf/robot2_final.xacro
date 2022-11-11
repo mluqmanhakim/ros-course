@@ -1,0 +1,141 @@
+<?xml version="1.0" ?>
+
+<robot name="robot2_2" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!-- Start of Includes-->
+    <xacro:include filename="$(find ex06)/urdf/links_joints.xacro" />
+    <!-- End of Includes -->
+
+    <!-- Start of robot description -->
+
+    <link name="base_footprint"></link>
+
+    <joint name="base_footprint_joint" type="fixed">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <parent link="base_footprint"/>
+        <child link="base_link" />
+    </joint>
+
+   
+    <xacro:m_link_box
+        name ="base_link" origin_rpy="0 0 0" origin_xyz="0 0 0.25" size="1 1 0.5" mass="1024" ixx="170.667" ixy="0" ixz="0" iyy="170.667" iyz="0" izz="170.667"
+    />
+
+    <xacro:m_joint 
+        name="J_0" 
+        type="revolute"
+        axis_xyz="0 0 1"
+        origin_rpy="0 0 0" 
+        origin_xyz="0 0 0.5"
+        parent="base_link" 
+        child="link_01"
+        limit_e="1000" 
+        limit_l="-3.14" 
+        limit_u="3.14" 
+        limit_v="0.5" 
+    />
+
+    <xacro:m_link_mesh name="link_01" origin_rpy="0 0 0" origin_xyz="0 0 0.2"
+                    mass="157.633" ixx="13.235" ixy="0" ixz="0" iyy="13.235" iyz="0"
+                    izz="9.655" meshfile="package://ex06/meshes/Link1-v2.stl"
+                    meshscale="0.001 0.001 0.001" />
+
+
+    <xacro:m_joint 
+        name="J_1" 
+        type="revolute"
+        axis_xyz="0 1 0"
+        origin_rpy="0 0 0" 
+        origin_xyz="0 0 0.4"
+        parent="link_01" 
+        child="link_02"
+        limit_e="1000" 
+        limit_l="-3.14" 
+        limit_u="3.14" 
+        limit_v="0.5" 
+    />
+
+
+    <xacro:m_link_cylindric 
+        name="link_02" origin_rpy="0 0 0" origin_xyz="0 0 0.4" radius="0.15" length="0.8"
+        size="1 1 0.5" mass="57.906" ixx="12.679" ixy="0" ixz="0" iyy="12.679" iyz="0" izz="0.651"
+    />
+
+    <xacro:m_joint 
+        name="J_2" 
+        type="revolute"
+        axis_xyz="0 1 0"
+        origin_rpy="0 0 0" 
+        origin_xyz="0 0 0.8"
+        parent="link_02" 
+        child="link_03"
+        limit_e="1000" 
+        limit_l="-3.14" 
+        limit_u="3.14" 
+        limit_v="0.5" 
+    />
+
+
+    <xacro:m_link_cylindric 
+        name="link_03" origin_rpy="0 0 0" origin_xyz="0 0 0.4" radius="0.15" length="0.8"
+        size="1 1 0.5" mass="57.906" ixx="12.679" ixy="0" ixz="0" iyy="12.679" iyz="0" izz="0.651"
+    />
+
+    <xacro:m_joint 
+        name="J_3" 
+        type="revolute"
+        axis_xyz="0 1 0"
+        origin_rpy="0 0 0" 
+        origin_xyz="0 0 0.8"
+        parent="link_03" 
+        child="link_04"
+        limit_e="1000" 
+        limit_l="-3.14" 
+        limit_u="3.14" 
+        limit_v="0.5" 
+    />
+
+
+    <xacro:m_link_cylindric 
+        name="link_04" origin_rpy="0 0 0" origin_xyz="0 0 0.4" radius="0.15" length="0.8"
+        size="1 1 0.5" mass="57.906" ixx="12.679" ixy="0" ixz="0" iyy="12.679" iyz="0" izz="0.651"
+    />
+
+    <xacro:m_joint 
+        name="J_4" 
+        type="revolute"
+        axis_xyz="0 0 1"
+        origin_rpy="0 0 0" 
+        origin_xyz="0 0 0.8"
+        parent="link_04" 
+        child="link_05"
+        limit_e="1000" 
+        limit_l="-3.14" 
+        limit_u="3.14" 
+        limit_v="0.5" 
+    />
+
+
+    <xacro:m_link_cylindric 
+        name="link_05" origin_rpy="0 0 0" origin_xyz="0 0 0.125" radius="0.15" length="0.25"
+        size="1 1 0.5" mass="18.056" ixx="0.479" ixy="0" ixz="0" iyy="0.479" iyz="0" izz="0.204"
+    />
+
+    <gazebo>
+        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+            <robotNamespace>/robot2</robotNamespace>
+        </plugin>
+    </gazebo>
+    
+    <gazebo>
+        <plugin name="joint_state_publisher" filename="libgazebo_ros_joint_state_publisher.so">
+            <robotNamespace>/robot2</robotNamespace>
+            <jointName>J_0, J_1, J_2, J_3, J_4</jointName>
+            <updateRate>50</updateRate>
+        </plugin>
+    </gazebo>
+
+
+    
+
+</robot>
