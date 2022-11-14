@@ -1,0 +1,91 @@
+<?xml version="1.0" ?>
+
+<robot name="robot2" xmlns:xacro="http://www.ros.org/wiki/xacro">
+     <!-- Start of robot description -->
+
+    <link name="base_footprint"></link>
+
+    <joint name="base_footprint_joint" type="fixed">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <parent link="base_footprint"/>
+        <child link="base_link" />
+    </joint>
+
+    <link name ="base_link">
+        <visual>
+            <origin rpy ="0 0 0 " xyz="0 0 0.25"/>
+            <geometry>
+                <cylinder radius="0.2" length="0.9"/>
+            </geometry>
+        </visual>
+    </link>
+
+    <joint name="J_0" type ="revolute">
+        <axis xyz="0 0 1"/>
+        <limit effort="1000.0" lower="-3.14" upper="3.14" velocity = "0.5"/>
+        <origin rpy="0 0 0" xyz="0 0 0.5"/>
+        <parent link="base_link"/>
+        <child link="link_01"/>
+    </joint>
+
+    <link name = "link_01">
+        <visual>
+            <origin rpy = "0 0 0" xyz="0.35 0 0.25"/>
+            <geometry>
+                <box size="0.9 0.2 0.1"/>
+            </geometry>
+        </visual>
+    </link>
+
+    <joint name="J_1" type ="revolute">
+        <axis xyz="0 0 1"/>
+        <limit effort="1000.0" lower="-3.14" upper="3.14" velocity="0.5"/>
+        <origin rpy="0 0 0" xyz="0.7 0 0.15"/>
+        <parent link="link_01"/>
+        <child link="link_02"/>
+    </joint>
+
+    <link name = "link_02">
+        <visual>
+            <origin rpy = "0 0 0 " xyz="0.3 0 0.2"/>
+            <geometry>
+                <box size="0.8 0.2 0.1"/>
+            </geometry>
+        </visual>
+    </link> 
+
+    <joint name="J_2" type ="revolute">
+        <axis xyz="0 0 1"/>
+        <limit effort="1000.0" lower="-3.14" upper="3.14" velocity = "0.5"/>
+        <origin rpy="0 0 0" xyz="0.6 0 -0.1"/>
+        <parent link="link_02"/>
+        <child link="link_03"/>
+    </joint>
+
+    <link name = "link_03">
+        <visual>
+            <origin rpy = "0 0 0" xyz="0 0 0.2"/>
+            <geometry>
+                <cylinder radius="0.1" length="0.1"/>
+            </geometry>
+        </visual>
+    </link>
+
+    <joint name="J_3" type ="prismatic">
+        <axis xyz="0 0 1"/>
+        <limit effort="1000.0" lower="-0.8" upper="0" velocity = "0.5"/>
+        <origin rpy="0 0 0" xyz="0 0 0.7"/>
+        <parent link="link_03"/>
+        <child link="link_04"/>
+    </joint>
+
+    <link name = "link_04">
+        <visual>
+            <origin rpy = "0 0 0" xyz="0 0 0"/>
+            <geometry>
+                <box size="0.1 0.1 0.8"/>
+            </geometry>
+        </visual>
+    </link>
+
+</robot>
